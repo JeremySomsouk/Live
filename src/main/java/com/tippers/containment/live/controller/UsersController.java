@@ -4,6 +4,7 @@ import com.tippers.containment.live.controller.dto.UserDto;
 import com.tippers.containment.live.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -27,6 +28,13 @@ public class UsersController {
 
         return usersService.findUserById(userId);
     }
+
+    @GetMapping
+    UserDto getUserByUsername(@RequestParam(value = "username") String username) {
+
+        return usersService.findUserByUsername(username);
+    }
+
 
     @GetMapping("/all")
     List<UserDto> getAllUsers() {

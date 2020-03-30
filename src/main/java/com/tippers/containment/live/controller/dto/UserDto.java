@@ -1,7 +1,8 @@
 package com.tippers.containment.live.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @Builder

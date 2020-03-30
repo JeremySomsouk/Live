@@ -5,9 +5,6 @@ import com.tippers.containment.live.controller.exception.UserNotFoundException;
 import com.tippers.containment.live.mapper.UsersMapper;
 import com.tippers.containment.live.repository.UsersRepository;
 import com.tippers.containment.live.repository.model.UserModel;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,5 +66,13 @@ public class UsersService {
 
     public void deleteUserById(Long userId) {
         usersRepository.deleteById(userId);
+    }
+
+    public UserDto findUserByUsername(String username) {
+        UserModel user = usersRepository.getByUsername(username);
+        if (user == null) {
+            throw new UserNotFoundException("User not found with username = " + username);
+        }
+        return usersMapper.toDto(user);
     }
 }
