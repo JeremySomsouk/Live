@@ -49,18 +49,20 @@ public class UsersService {
 
     public UserDto replaceUserById(Long userId, UserDto newUser) {
 
-        UserModel user = usersRepository.findById(userId)
-                .map(userModel -> {
-                    userModel.setUsername(newUser.getUsername());
-                    userModel.setJob(newUser.getJob());
-                    userModel.setAge(newUser.getAge());
-                    return usersRepository.save(userModel);
-                })
-                .orElseGet(() -> {
-                    UserModel userModel = usersMapper.toModel(newUser);
-                    userModel.setUserId(userId);
-                    return userModel;
-                });
+        UserModel user = usersRepository.save(
+                usersRepository.findById(userId)
+                        .map(userModel -> {
+                            userModel.setUsername(newUser.getUsername());
+                            userModel.setJob(newUser.getJob());
+                            userModel.setAge(newUser.getAge());
+                            return userModel;
+                        })
+                        .orElseGet(() -> {
+                            UserModel userModel = usersMapper.toModel(newUser);
+                            userModel.setUserId(userId);
+                            return userModel;
+                        })
+        );
         return usersMapper.toDto(user);
     }
 

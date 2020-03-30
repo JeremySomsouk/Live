@@ -25,16 +25,13 @@ public class UsersController {
 
     @GetMapping("/{userId}")
     UserDto getUserById(@PathVariable(value = "userId") Long userId) {
-
         return usersService.findUserById(userId);
     }
 
     @GetMapping
     UserDto getUserByUsername(@RequestParam(value = "username") String username) {
-
         return usersService.findUserByUsername(username);
     }
-
 
     @GetMapping("/all")
     List<UserDto> getAllUsers() {
