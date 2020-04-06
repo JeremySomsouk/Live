@@ -16,11 +16,10 @@ import java.util.stream.Stream;
 public class Java9 {
     static Logger LOGGER = LoggerFactory.getLogger(Java9.class);
 
-
     // What's new ?
     // - Java Shell
     // - Jigsaw Project : modular system
-    // - Reactive Stream API    // -
+    // - Reactive Stream API
     // - Enhanced @Deprecated annotation : forRemoval=true
     // - HTTP 2 client
 
@@ -82,7 +81,7 @@ public class Java9 {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         getImmutableSet();
         printProcessInfos();
         completableFuture();

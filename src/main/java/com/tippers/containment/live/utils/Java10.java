@@ -30,7 +30,7 @@ public class Java10 {
         return List.copyOf(collection);
     }
 
-    public static List<Integer> getUnmodifiableList(List<Integer> collection) {
+    public static List<String> getUnmodifiableList(List<String> collection) {
         return collection.stream().collect(Collectors.toUnmodifiableList());
     }
 
@@ -42,8 +42,8 @@ public class Java10 {
 
     public static void main(String[] args) {
         printOneToFiveVariables();
-        getCopyOf(List.of("a"));
-        getUnmodifiableList(List.of(3,2,1));
+        List<String> copyOf = getCopyOf(List.of("a", "b", "c"));
+        getUnmodifiableList(copyOf);
         getDoubleOrElseThrow();
     }
 }
