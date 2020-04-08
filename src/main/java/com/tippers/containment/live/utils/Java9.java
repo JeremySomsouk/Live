@@ -23,7 +23,7 @@ public class Java9 {
     // - Enhanced @Deprecated annotation : forRemoval=true
     // - HTTP 2 client
 
-    @Deprecated(since = "2012", forRemoval = true)
+    @Deprecated(since = "1.9", forRemoval = true)
     public static void deprecatedMethodSinceForRemoval() {}
 
     public static Set getImmutableSet() {
