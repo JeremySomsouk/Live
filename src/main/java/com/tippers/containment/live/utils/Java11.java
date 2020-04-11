@@ -42,9 +42,7 @@ public class Java11 {
     public static void varLambdaLanguageFeature() {
         String a = "a";
         String b = "b";
-        BiConsumer<String, String> c = (var s1, var s2) -> {
-            LOGGER.info(s1 + s2);
-        };
+        BiConsumer<String, String> c = (var s1, var s2) -> LOGGER.info(s1 + s2);
         c.accept(a, b);
     }
 
