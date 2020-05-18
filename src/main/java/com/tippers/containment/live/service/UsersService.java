@@ -3,8 +3,8 @@ package com.tippers.containment.live.service;
 import com.tippers.containment.live.controller.dto.UserDto;
 import com.tippers.containment.live.controller.exception.UserNotFoundException;
 import com.tippers.containment.live.mapper.UsersMapper;
-import com.tippers.containment.live.repository.UsersRepository;
-import com.tippers.containment.live.repository.model.UserModel;
+import com.tippers.containment.live.repository.postgres.UsersRepository;
+import com.tippers.containment.live.repository.model.postgres.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,40 +27,40 @@ public class UsersService {
 
     public List<UserDto> getAllUsers() {
 
-        List<UserModel> allUsers = usersRepository.findAll();
+        List<Users> allUsers = usersRepository.findAll();
         return allUsers.stream()
-                .map(userModel -> usersMapper.toDto(userModel))
+                .map(user -> usersMapper.toDto(user))
                 .collect(toList());
     }
 
     public UserDto saveUser(UserDto newUser) {
 
-        UserModel userModel = usersMapper.toModel(newUser);
-        UserModel savedUser = usersRepository.save(userModel);
+        Users user = usersMapper.toModel(newUser);
+        Users savedUser = usersRepository.save(user);
         return usersMapper.toDto(savedUser);
     }
 
     public UserDto findUserById(Long userId) {
 
-        UserModel userModel = usersRepository.findById(userId)
+        Users user = usersRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User not found : userId=%s", userId)));
-        return usersMapper.toDto(userModel);
+        return usersMapper.toDto(user);
     }
 
     public UserDto replaceUserById(Long userId, UserDto newUser) {
 
-        UserModel user = usersRepository.save(
+        Users user = usersRepository.save(
                 usersRepository.findById(userId)
-                        .map(userModel -> {
-                            userModel.setUsername(newUser.getUsername());
-                            userModel.setJob(newUser.getJob());
-                            userModel.setAge(newUser.getAge());
-                            return userModel;
+                        .map(users -> {
+                            users.setUsername(newUser.getUsername());
+                            users.setJob(newUser.getJob());
+                            users.setAge(newUser.getAge());
+                            return users;
                         })
                         .orElseGet(() -> {
-                            UserModel userModel = usersMapper.toModel(newUser);
-                            userModel.setUserId(userId);
-                            return userModel;
+                            Users users = usersMapper.toModel(newUser);
+                            users.setUserId(userId);
+                            return users;
                         })
         );
         return usersMapper.toDto(user);
@@ -71,7 +71,7 @@ public class UsersService {
     }
 
     public UserDto findUserByUsername(String username) {
-        UserModel user = usersRepository.getByUsername(username);
+        Users user = usersRepository.getByUsername(username);
         if (user == null) {
             throw new UserNotFoundException("User not found with username = " + username);
         }

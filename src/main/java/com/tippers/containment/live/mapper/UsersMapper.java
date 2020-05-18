@@ -1,25 +1,25 @@
 package com.tippers.containment.live.mapper;
 
 import com.tippers.containment.live.controller.dto.UserDto;
-import com.tippers.containment.live.repository.model.UserModel;
+import com.tippers.containment.live.repository.model.postgres.Users;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UsersMapper implements Mapper<UserDto, UserModel> {
+public class UsersMapper implements Mapper<UserDto, Users> {
 
-    public final UserDto toDto(UserModel userModel) {
+    public final UserDto toDto(Users user) {
 
         return UserDto.builder()
-                .userId(userModel.getUserId())
-                .username(userModel.getUsername())
-                .job(userModel.getJob())
-                .age(userModel.getAge())
+                .userId(user.getUserId())
+                .username(user.getUsername())
+                .job(user.getJob())
+                .age(user.getAge())
                 .build();
     }
 
-    public final UserModel toModel(UserDto userDto) {
+    public final Users toModel(UserDto userDto) {
 
-        return UserModel.builder()
+        return Users.builder()
                 .userId(userDto.getUserId())
                 .username(userDto.getUsername())
                 .job(userDto.getJob())
