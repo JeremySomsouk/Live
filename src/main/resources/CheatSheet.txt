@@ -1,0 +1,26 @@
+# PostgreSQL #
+
+docker run --name postgresTest -d -p 5432:5432 -e POSTGRES_PASSWORD=test postgres
+psql -U postgres
+\l (List available databases)
+CREATE DATABASE myDB;
+\c myDB;
+\dt (List available tables)
+\d ${table_name} (Describe table)
+
+# MySQL #
+
+docker run --name mySQLTest -d -p 3306:3306 -d mysql/mysql-server:latest
+docker logs mySQLTest
+docker exec -it mySQLTest mysql -uroot -p
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'azerty123';
+create database db_example;
+create user 'springuser'@'%' identified by 'ThePassword';
+grant all on db_example.* to 'springuser'@'%'; -- Gives all privileges to the new user
+
+# Redis #
+docker run --name redisTest -d -p 6379:6379 redis
+docker exec -it redisTest redis-cli
+KEYS *
+GET $key$
+HGETALL $key$

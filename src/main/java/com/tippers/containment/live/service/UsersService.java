@@ -3,8 +3,8 @@ package com.tippers.containment.live.service;
 import com.tippers.containment.live.controller.dto.UserDto;
 import com.tippers.containment.live.controller.exception.UserNotFoundException;
 import com.tippers.containment.live.mapper.UsersMapper;
-import com.tippers.containment.live.repository.postgres.UsersRepository;
 import com.tippers.containment.live.repository.model.postgres.Users;
+import com.tippers.containment.live.repository.postgres.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
