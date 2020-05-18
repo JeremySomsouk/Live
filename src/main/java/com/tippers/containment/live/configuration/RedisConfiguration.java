@@ -1,7 +1,6 @@
 package com.tippers.containment.live.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,13 +23,11 @@ public class RedisConfiguration {
     private int redisPort;
 
     @Bean
-    @ConditionalOnProperty(name = "redis.enabled", havingValue = "true")
     JedisConnectionFactory jedisConnectionFactory() {
         return new JedisConnectionFactory(new RedisStandaloneConfiguration(redisHostname, redisPort));
     }
 
     @Bean
-    @ConditionalOnProperty(name = "redis.enabled", havingValue = "true")
     public RedisTemplate<String, Object> redisTemplate() {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(jedisConnectionFactory());
